@@ -2,29 +2,35 @@
 <html lang=de>
 	<head>
 		<meta charset=UTF-8>
+		<title>an-abmelden</title>
+		<link rel="stylesheet" href="../Design/style.css">
 	</head>
 	<body>  
-		<h2>Log_In-Formular</h2>
-		<p><span class="error">* required field.</span></p>
-		<form method="post" action="log_In.html">  
-		  Name: <input type="text" name="name" value="">
-		  <span class="error">* <?php echo $nameErr;?></span>
-		  <br><br>
-		  E-mail: <input type="text" name="email" value="">
-		  <span class="error">* <?php echo $emailErr;?></span>
-		  <br><br>
-		  Webseite: <input type="text" name="webseite" value="">
-		  <span class="error"><?php echo $webseiteErr;?></span>
-		  <br><br>
-		  Kommentar: <textarea name="Kommentar" rows="5" cols="40"></textarea>
-		  <br><br>
-		  Geschlecht:
-		  <input type="radio" name="Geschlecht"  value="female">Female
-		  <input type="radio" name="Geschlecht"  value="male">Male
-		  <span class="error">* <?php echo $geschlechtErr;?></span>
-		  <br><br>
-		  <input type="submit" name="submit" value="Submit">  
-		</form>
-
+		<div class="flex-container">
+			<header>
+				<h1>Log-in-Formular</h1>
+			</header>
+			<p><span class="error">* required field.</span></p>
+			<form method="post" action="log_In.html">  
+			  Name: <input type="text" name="name" value="">
+			  <span class="error">* <?php echo $nameErr;?></span>
+			  <br><br>
+			  E-mail: <input type="text" name="email" value="">
+			  <span class="error">* <?php echo $emailErr;?></span>
+			  <br><br>
+			  Webseite: <input type="text" name="webseite" value="">
+			  <span class="error"><?php echo $webseiteErr;?></span>
+			  <br><br>
+			  Kommentar: <textarea name="Kommentar" rows="5" cols="40"></textarea>
+			  <br><br>
+			  Geschlecht:
+			  <input type="radio" name="Geschlecht"  value="female">Female
+			  <input type="radio" name="Geschlecht"  value="male">Male
+			  <span class="error">* <?php echo $geschlechtErr;?></span>
+			  <br><br>
+			  <input type="submit" name="submit" value="Submit">  
+			</form>
+			<footer>Copyright © Projekt1</footer>
+		</div>
 	</body>
 </html>
