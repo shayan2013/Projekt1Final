@@ -6,26 +6,84 @@
 		<link rel="stylesheet" href="../Design/style.css">
 	</head>
 	<body>  
+		<?php
+			// Variables definieren
+			$nameErr = $emailErr = $geschlechtErr = $webseiteErr = "";
+			$name = $email = $geschlecht = $kommentar = $webseite = "";
+
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			  if (empty($_POST["name"])) {
+			    $nameErr = "name is required";
+			  } else {
+			    $name = eingabe_test($_POST["name"]);
+			    // testen ob Eingabe aus Buchstaben und whitespace besteht
+			    if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+			      $nameErr = "Only letters and white space allowed"; 
+			    }
+			  }
+			  
+			  if (empty($_POST["email"])) {
+			    $emailErr = "Email is required";
+			  } else {
+			    $email = eingabe_test($_POST["email"]);
+			    // testen on Email normale Formulierung hat
+			    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			      $emailErr = "Invalid email format"; 
+			    }
+			  }
+			    
+			  if (empty($_POST["webseite"])) {
+			    $webseite = "";
+			  } else {
+			    $webseite = eingabe_test($_POST["webseite"]);
+			    // testen on URL-adresse gültig ist
+			    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$webseite)) {
+			      $webseiteErr = "Invalid URL"; 
+			    }
+			  }
+
+			  if (empty($_POST["kommentar"])) {
+			    $kommentar = "";
+			  } else {
+			    $kommentar = eingabe_test($_POST["kommentar"]);
+			  }
+
+			  if (empty($_POST["geschlecht"])) {
+			    $geschlechtErr = "geschlecht is required";
+			  } else {
+			    $geschlecht = eingabe_test($_POST["geschlecht"]);
+			  }
+			}
+
+			function eingabe_test($data) {
+			  $data = trim($data);
+			  $data = stripslashes($data);
+			  $data = htmlspecialchars($data);
+			  return $data;
+			}
+		?>
+		
+		
 		<div class="flex-container">
 			<header>
 				<h1>Log-in-Formular</h1>
 			</header>
 			<p><span class="error">* required field.</span></p>
-			<form method="post" action="log_In.html">  
-			  Name: <input type="text" name="name" value="">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+			  name: <input type="text" name="name" value="<?php echo $name;?>">
 			  <span class="error">* <?php echo $nameErr;?></span>
 			  <br><br>
-			  E-mail: <input type="text" name="email" value="">
+			  E-mail: <input type="text" name="email" value="<?php echo $email;?>">
 			  <span class="error">* <?php echo $emailErr;?></span>
 			  <br><br>
-			  Webseite: <input type="text" name="webseite" value="">
+			  Webseite: <input type="text" name="webseite" value="<?php echo $webseite;?>">
 			  <span class="error"><?php echo $webseiteErr;?></span>
 			  <br><br>
-			  Kommentar: <textarea name="Kommentar" rows="5" cols="40"></textarea>
+			  kommentar: <textarea name="kommentar" rows="5" cols="40"><?php echo $kommentar;?></textarea>
 			  <br><br>
-			  Geschlecht:
-			  <input type="radio" name="Geschlecht"  value="female">Female
-			  <input type="radio" name="Geschlecht"  value="male">Male
+			  geschlecht:
+			  <input type="radio" name="geschlecht" <?php if (isset($geschlecht) && $geschlecht=="female") echo "checked";?> value="female">Female
+			  <input type="radio" name="geschlecht" <?php if (isset($geschlecht) && $geschlecht=="male") echo "checked";?> value="male">Male
 			  <span class="error">* <?php echo $geschlechtErr;?></span>
 			  <br><br>
 			  <input type="submit" name="submit" value="Submit">  
