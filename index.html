@@ -24,6 +24,11 @@ echo GREETING;
 					<li><a href="#">Photos/Videos</a></li>
 				</ul>
 			</nav>
+			<form action="Microservices_de/upload.php" method="post" enctype="multipart/form-data">
+				Bilder Hochladen:
+				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input type="submit" value="Upload Image" name="submit">
+			</form>			
 			<footer>Copyright © Projekt1</footer>
 		</div>
 	</body>
