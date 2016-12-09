@@ -17,14 +17,7 @@ echo GREETING;
 			<header>
 				<?php headi();?>
 			</header>
-			<nav class="nav">
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="Microservices_de/log_In.php">An-Abmeldung</a></li>
-					<li><a href="#">Einstellung</a></li>
-					<li><a href="#">Photos/Videos</a></li>
-				</ul>
-			</nav>
+			<?php include 'Microservices_de/navigation.php';?>
 			<form action="Microservices_de/upload.php" method="post" enctype="multipart/form-data">
 				Bilder Hochladen:
 				<input type="file" name="fileToUpload" id="fileToUpload">
