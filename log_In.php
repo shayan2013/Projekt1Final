@@ -2,9 +2,8 @@
 <!DOCTYPE HTML>  
 <html lang=de>
 	<head>
-		<meta charset=UTF-8>
+		<?php include 'Microservices_de/meta.php';?>
 		<title>Home</title>
-		<link rel="stylesheet" href="Design/style.css">
 	</head>
 	<body>  
 
