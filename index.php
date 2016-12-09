@@ -1,3 +1,4 @@
+<?php include 'Microservices_de/headerFooter.php';?>
 <!DOCTYPE html>
 
 <?php
@@ -14,7 +15,7 @@ echo GREETING;
 	<body>
 		<div class="flex-container">
 			<header>
-				<h1>ShaBlog</h1>
+				<?php headi();?>
 			</header>
 			<nav class="nav">
 				<ul>
@@ -29,7 +30,7 @@ echo GREETING;
 				<input type="file" name="fileToUpload" id="fileToUpload">
 				<input type="submit" value="Upload Image" name="submit">
 			</form>			
-			<footer>Copyright © Projekt1</footer>
+			<footer><?php footi();?></footer>
 		</div>
 	</body>
 </html>
