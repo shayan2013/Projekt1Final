@@ -1,3 +1,4 @@
+<?php include 'headerFooter.php';?>
 <!DOCTYPE HTML>  
 <html lang=de>
 	<head>
@@ -79,6 +80,7 @@
 		<div class="flex-container">
 			<header>
 				<h1>Anmeldeformular</h1>
+				<?php headi();?>
 			</header>
 		
 			<p><span class="error">* Pflichtfeld.</span></p>
@@ -107,7 +109,7 @@
 			  <br><br>
 			  <input type="submit" name="submit" value="Absenden">  
 			</form>
-			<footer>Copyright © Projekt1</footer>
+			<footer><?php footi();?></footer>
 		</div>
 
 	<?php
