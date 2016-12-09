@@ -82,7 +82,7 @@
 				<h1>Anmeldeformular</h1>
 				<?php headi();?>
 			</header>
-		
+			<?php include 'navigation.php';?>
 			<p><span class="error">* Pflichtfeld.</span></p>
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
 			  Username: <input type="text" name="name" value="<?php echo $name;?>">
