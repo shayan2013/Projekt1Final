@@ -1,10 +1,10 @@
-<?php include 'headerFooter.php';?>
+<?php include 'Microservices_de/headerFooter.php';?>
 <!DOCTYPE HTML>  
 <html lang=de>
 	<head>
 		<meta charset=UTF-8>
 		<title>Home</title>
-		<link rel="stylesheet" href="../Design/style.css">
+		<link rel="stylesheet" href="Design/style.css">
 	</head>
 	<body>  
 
@@ -82,7 +82,7 @@
 				<h1>Anmeldeformular</h1>
 				<?php headi();?>
 			</header>
-			<?php include 'navigation.php';?>
+			<?php include 'Microservices_de/navigation.php';?>
 			<p><span class="error">* Pflichtfeld.</span></p>
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
 			  Username: <input type="text" name="name" value="<?php echo $name;?>">
