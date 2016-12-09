@@ -1,6 +1,5 @@
 <?php
 	function headi(){
-		echo "<h1>ShaBlog</h1>";
 		getDateTime(); 
 	}
 
