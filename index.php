@@ -1,10 +1,9 @@
 <?php include 'Microservices_de/headerFooter.php';?>
 <!DOCTYPE html>
 
-<?php
-define("GREETING", "Welcome to ShaBlog.de!");
-echo GREETING;
-?>
+<script>
+	window.alert("Welcome to ShaBlog");
+</script>
 
 <html lang=de>
 	<head>
