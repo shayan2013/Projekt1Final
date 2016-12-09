@@ -15,6 +15,7 @@ echo GREETING;
 	<body>
 		<div class="flex-container">
 			<header>
+				<h1>ShaBlog</h1>
 				<?php headi();?>
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>
