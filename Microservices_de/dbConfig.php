@@ -32,7 +32,6 @@ function createTable(){
 	kennwort VARCHAR(30) NOT NULL,
 	website VARCHAR(50),
 	kommentar VARCHAR(100),
-	website VARCHAR(50),
 	geschlecht VARCHAR(9) NOT NULL,
 	reg_date TIMESTAMP
 	)";
@@ -41,6 +40,18 @@ function createTable(){
 	    echo "users Tabelle erfolgreich erstellt";
 	} else {
 	    echo "Error Tebelle erstellen: " . $conn->error;
+	}
+}
+
+//Daten einfuegen
+function createData(uname, eMail, kenn, webseite, komment, gesch){
+	$sql = "INSERT INTO users (username, email, kennwort, website, kommentar, geschlecht)
+	VALUES (uname, eMail, kenn, webseite, komment, gesch)";
+
+	if ($conn->query($sql) === TRUE) {
+	    echo "Daten erfolgreich eingefuegt";
+	} else {
+	    echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 }
 
