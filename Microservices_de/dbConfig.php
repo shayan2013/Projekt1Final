@@ -44,15 +44,17 @@ function createTable(){
 }
 
 //Daten einfuegen
-function createData(uname, eMail, kenn, webseite, komment, gesch){
-	$sql = "INSERT INTO users (username, email, kennwort, website, kommentar, geschlecht)
-	VALUES (uname, eMail, kenn, webseite, komment, gesch)";
-
-	if ($conn->query($sql) === TRUE) {
+function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
+	$sql = "INSERT INTO users (username, email, kennwort, website, kommentar, geschlecht) VALUES (?, ?, ?, ?, ?, ?)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("ssssss", $uname, $eMail, $kenn, $webseite, $komment, $gesch);
+	$stmt->execute();
+	if ($stmt->execute()) {
 	    echo "Daten erfolgreich eingefuegt";
 	} else {
 	    echo "Error: " . $sql . "<br>" . $conn->error;
 	}
+	$stmt->close();
 }
 
 //Verbindung aufheben
