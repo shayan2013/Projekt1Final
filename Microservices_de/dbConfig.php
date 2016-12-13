@@ -1,17 +1,29 @@
 <?php
 $servername = "localhost";
-$username = "username";
-$password = "password";
+$username = "root";
+$password = "YZmAfDpGyAUY3ax3";
 $dbname = "Shablog";
 
 // Datenbank erstellen
 function create(){
-	$sql = "CREATE DATABASE $dbname";
-	if ($conn->query($sql) === TRUE) {
-    	echo "Datenbank erfolgreich erstellt";
-	} else {
-    	echo "Error Datenbankerstellung: " . $conn->error;
+	// MySQL Verbindung
+	$link = mysql_connect('localhost', $username, $password);
+	if (!$link) {
+		die('Could not connect: ' . mysql_error());
 	}
+	// Make my_db the current database
+	$db_selected = mysql_select_db($dbname, $link);
+	if (!$db_selected) {
+	  // Wenn Db nicht ausgewaehlt wwerden kann dann existiert sie  entweder nicht oder wir koennen es nicht sehen 
+	  $sql = "CREATE DATABASE $dbname";
+	  if (mysql_query($sql, $link)) {
+		  echo "Datenbank erfolgreich erstellt \n";
+	  } else {
+		  echo "Error Datenbankerstellung: " . mysql_error() . "\n";
+	  }
+	}
+	mysql_close($link);
+
 }
 
 // Verbindung erstellen
