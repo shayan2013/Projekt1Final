@@ -57,6 +57,21 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 	$stmt->close();
 }
 
+function selectAll(){
+	$sql = "SEELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+    // Daten ausgeben
+	    while($row = $result->fetch_assoc()) {
+	        echo "id: " . $row["id"]. " - username: " . $row["username"]. " - email" . $row["email"]. " - kennwort" . $row["kennwort"]. "<br>"
+			 " - website" . $row["website"]. " - kommentar" . $row["kommentar"]. " - geschlecht" . $row["geschlecht"]. " - reg_date" . $row["reg_date"]. "<br>";
+	    }
+	} else {
+    echo "0 results";
+	}
+	
+}
+
 //Verbindung aufheben
 function closeConn(){
 	$conn->close();
