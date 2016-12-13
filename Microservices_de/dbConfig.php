@@ -6,8 +6,9 @@ $dbname = "Shablog";
 
 // Datenbank erstellen
 function create(){
+	global $servername, $username, $password, $dbname;
 	// MySQL Verbindung
-	$link = mysql_connect('localhost', $username, $password);
+	$link = mysql_connect($servername, $username, $password);
 	if (!$link) {
 		die('Could not connect: ' . mysql_error());
 	}
@@ -28,7 +29,8 @@ function create(){
 
 // Verbindung erstellen
 function connect(){
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	global $servername, $username, $password, $dbname;
+	$GLOBALS['conn'] = new mysqli($servername, $username, $password, $dbname);
 	// test die Verbindung
 	if ($conn->connect_error) {
     	die("Verbindungsfehler: " . $conn->connect_error);
@@ -37,6 +39,7 @@ function connect(){
 
 // tebelle erstellen
 function createTable(){
+	global $conn;
 	$sql = "CREATE TABLE IF NOT EXISTS users (
 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 	username VARCHAR(30) NOT NULL,
@@ -57,6 +60,7 @@ function createTable(){
 
 //Daten einfuegen
 function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
+	global $conn;
 	$sql = "INSERT INTO users (username, email, kennwort, website, kommentar, geschlecht) VALUES (?, ?, ?, ?, ?, ?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("ssssss", $uname, $eMail, $kenn, $webseite, $komment, $gesch);
@@ -70,6 +74,7 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 }
 
 function selectAll(){
+	global $conn;
 	$sql = "SEELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
@@ -86,6 +91,7 @@ function selectAll(){
 
 //Verbindung aufheben
 function closeConn(){
+	global $conn;
 	$conn->close();
 }
 
