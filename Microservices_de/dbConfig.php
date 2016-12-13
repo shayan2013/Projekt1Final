@@ -11,7 +11,7 @@ function create(){
 	if (!$link) {
 		die('Could not connect: ' . mysql_error());
 	}
-	// Make my_db the current database
+	// Datenbank auswaehlen
 	$db_selected = mysql_select_db($dbname, $link);
 	if (!$db_selected) {
 	  // Wenn Db nicht ausgewaehlt wwerden kann dann existiert sie  entweder nicht oder wir koennen es nicht sehen 
@@ -37,7 +37,7 @@ function connect(){
 
 // tebelle erstellen
 function createTable(){
-	$sql = "CREATE TABLE users (
+	$sql = "CREATE TABLE IF NOT EXISTS users (
 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 	username VARCHAR(30) NOT NULL,
 	email VARCHAR(50) NOT NULL,
