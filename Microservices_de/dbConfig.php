@@ -12,51 +12,33 @@ function create(){
 	if (!$link) {
 		die('Could not connect: ' . mysql_error());
 	}
+	echo "Verbindung erfolgreich erstellt";
 	// Datenbank auswaehlen
 	$db_selected = mysql_select_db($dbname, $link);
 	if (!$db_selected) {
 	  // Wenn Db nicht ausgewaehlt wwerden kann dann existiert sie  entweder nicht oder wir koennen es nicht sehen 
-	  $sql = "CREATE DATABASE $dbname";
+	  $sql = "CREATE DATABASE IF NOT EXISTS " .$dbname;
 	  if (mysql_query($sql, $link)) {
 		  echo "Datenbank erfolgreich erstellt \n";
 	  } else {
 		  echo "Error Datenbankerstellung: " . mysql_error() . "\n";
 	  }
 	}
-	mysql_close($link);
+	//$GLOBALS['db_selected'];
+	//$conn = new mysqli($servername, $username, $password, $dbname);
 
+	// tebelle erstellen
+	$sql = "CREATE TABLE IF NOT EXISTS users ( `id` INT(6) UNSIGNED NOT NULL AUTO_INCREMENT ,
+	`username` VARCHAR(30) NOT NULL , `email` VARCHAR(50) NOT NULL , 
+	`kennwort` VARCHAR(30) NOT NULL , `website` VARCHAR(50) NOT NULL ,
+	`kommentar` VARCHAR(100) NOT NULL , `geschlecht` VARCHAR(9) NOT NULL ,
+	`reg_date` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	PRIMARY KEY (`id`)) ENGINE = InnoDB; ";
+	
+	$GLOBAL['conn'] = new mysqli($servername, $username, $password, $dbname);
+	$conn->query($sql);
 }
 
-// Verbindung erstellen
-function connect(){
-	global $servername, $username, $password, $dbname;
-	$GLOBALS['conn'] = new mysqli($servername, $username, $password, $dbname);
-	// test die Verbindung
-	if ($conn->connect_error) {
-    	die("Verbindungsfehler: " . $conn->connect_error);
-	}
-}
-
-// tebelle erstellen
-function createTable(){
-	global $conn;
-	$sql = "CREATE TABLE IF NOT EXISTS users (
-	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-	username VARCHAR(30) NOT NULL,
-	email VARCHAR(50) NOT NULL,
-	kennwort VARCHAR(30) NOT NULL,
-	website VARCHAR(50),
-	kommentar VARCHAR(100),
-	geschlecht VARCHAR(9) NOT NULL,
-	reg_date TIMESTAMP
-	)";
-
-	if ($conn->query($sql) === TRUE) {
-	    echo "users Tabelle erfolgreich erstellt";
-	} else {
-	    echo "Error Tebelle erstellen: " . $conn->error;
-	}
-}
 
 //Daten einfuegen
 function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
@@ -65,11 +47,7 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("ssssss", $uname, $eMail, $kenn, $webseite, $komment, $gesch);
 	$stmt->execute();
-	if ($stmt->execute()) {
-	    echo "Daten erfolgreich eingefuegt";
-	} else {
-	    echo "Error: " . $sql . "<br>" . $conn->error;
-	}
+	echo "Daten erfolgreich eingetragen.";
 	$stmt->close();
 }
 
