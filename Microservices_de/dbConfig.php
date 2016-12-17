@@ -24,8 +24,8 @@ function create(){
 		  echo "Error Datenbankerstellung: " . mysql_error() . "\n";
 	  }
 	}
-	//$GLOBALS['db_selected'];
-	//$conn = new mysqli($servername, $username, $password, $dbname);
+	$GLOBAL['conn'] = new mysqli($servername, $username, $password, $dbname);
+
 
 	// tebelle erstellen
 	$sql = "CREATE TABLE IF NOT EXISTS users ( `id` INT(6) UNSIGNED NOT NULL AUTO_INCREMENT ,
@@ -68,9 +68,11 @@ function selectAll(){
 }
 
 //loeschen
-function deletData($id){
-	$stmt = $mysqli->prepare("DELETE FROM users WHERE id = ?");
+function deleteData($id){
+	//global $conn;
+	$sql = "DELETE FROM users WHERE id = '?'";
 	$stmt = $conn->prepare($sql);
+	//$stmt = $conn->prepare($sql);
 	$stmt->bind_param("i", $id);
 	$stmt->execute(); 
 	if ($conn->query($sql) === TRUE) {
