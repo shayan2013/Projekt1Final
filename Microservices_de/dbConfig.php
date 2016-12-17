@@ -51,6 +51,7 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 	$stmt->close();
 }
 
+//alles ausgeben
 function selectAll(){
 	//global $conn;
 	$sql = "SEELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
@@ -65,6 +66,23 @@ function selectAll(){
 	}
 	
 }
+
+//loeschen
+function deletData($id){
+	$stmt = $mysqli->prepare("DELETE FROM users WHERE id = ?");
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("i", $id);
+	$stmt->execute(); 
+	if ($conn->query($sql) === TRUE) {
+		echo "Daten erfolgreich geloescht.";
+	} else {
+		echo "Daten nicht geloescht: " . $conn->error;
+	}
+	
+	$stmt->close();
+}
+
+
 
 //Verbindung aufheben
 function closeConn(){
