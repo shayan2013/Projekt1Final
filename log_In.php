@@ -1,4 +1,5 @@
 <?php include 'Microservices_de/headerFooter.php';?>
+<?php include 'Microservices_de/dbConfig.php';?>
 <!DOCTYPE HTML>  
 <html lang=de>
 	<head>
@@ -8,14 +9,15 @@
 	<body>  
 
 	<?php
-	// define variables and set to empty values
+	// Variablen mit leeren Values erstellen
 	$nameErr = $emailErr = $geschlechtErr = $kennwortErr = $kennwort2Err = $websiteErr = "";
 	$name = $email = $geschlecht = $kennwort = $kennwort2 = $kommentar = $website = "";
+	$x = 0;
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	  if (empty($_POST["name"])) {
 		$nameErr = "Name erforderlich!";
-		 // check if name only contains letters and whitespace
+		 // testen ob der Name nur aus Buchstaben und Leertaste besteht
 	  } elseif (!preg_match("/^[a-zA-Z ]*$/",$name)) {
 		  $nameErr = "Nur Buchstaben und Leertaste erlaubt!"; 
 		}else {
@@ -24,7 +26,7 @@
 	  
 	  if (empty($_POST["email"])) {
 		$emailErr = "Email erforderlich!";
-			// check if e-mail address is well-formed
+			// testen ob Emailadresse gültige Form entspricht
 	  } elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		  $emailErr = "ungültige Email-format"; 
 		}else {
@@ -124,6 +126,7 @@
 	echo $kommentar;
 	echo "<br>";
 	echo $geschlecht;
+	echo $x;
 	?>
 
 	</body>
