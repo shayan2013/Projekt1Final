@@ -35,14 +35,14 @@ function create(){
 	`reg_date` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 	PRIMARY KEY (`id`)) ENGINE = InnoDB; ";
 	
-	$GLOBAL['conn'] = new mysqli($servername, $username, $password, $dbname);
+	$conn = new mysqli($servername, $username, $password, $dbname);
 	$conn->query($sql);
 }
 
 
 //Daten einfuegen
 function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
-	global $conn;
+	//global $conn;
 	$sql = "INSERT INTO users (username, email, kennwort, website, kommentar, geschlecht) VALUES (?, ?, ?, ?, ?, ?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("ssssss", $uname, $eMail, $kenn, $webseite, $komment, $gesch);
@@ -52,17 +52,16 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 }
 
 function selectAll(){
-	global $conn;
+	//global $conn;
 	$sql = "SEELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
 	$result = $conn->query($sql);
-	if ($result->num_rows > 0) {
-    // Daten ausgeben
-	    while($row = $result->fetch_assoc()) {
-	        echo "id: " . $row["id"]. " - username: " . $row["username"]. " - email" . $row["email"]. " - kennwort" . $row["kennwort"]. "<br>"
+	if ($result->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			echo "id: " . $row["id"]. " - username: " . $row["username"]. " - email" . $row["email"]. " - kennwort" . $row["kennwort"]. "<br>" .
 			 " - website" . $row["website"]. " - kommentar" . $row["kommentar"]. " - geschlecht" . $row["geschlecht"]. " - reg_date" . $row["reg_date"]. "<br>";
-	    }
-	} else {
-    echo "0 results";
+		}
+	}else {
+		echo "ergebnis 0";
 	}
 	
 }
