@@ -54,7 +54,7 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 //alles ausgeben
 function selectAll(){
 	//global $conn;
-	$sql = "SEELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
+	$sql = "SELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
@@ -81,6 +81,20 @@ function deleteData($id){
 		echo "Daten nicht geloescht: " . $conn->error;
 	}
 	
+	$stmt->close();
+}
+
+//Daten aktuallisieren
+function updateData($uname, $eMail, $kenn, $webseite, $komment, $gesch, $id) {
+	$sql = "UPDATE users SET username = ?, email = ?, kennwort = ?, website = ?, kommentar = ?, geschlecht = ? WHERE id = ?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('ssssssi', $uname, $eMail, $kenn, $webseite, $komment, $gesch, $id);
+	$stmt->execute();
+	if ($conn->query($sql) === TRUE) {
+		echo "Daten erfolgreich aktualisiert.";
+	} else {
+		echo "Daten nicht aktualisiert: " . $conn->error;
+	}
 	$stmt->close();
 }
 
