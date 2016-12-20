@@ -56,7 +56,8 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 
 //alles ausgeben
 function selectAll(){
-	global $conn;
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "SELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){
@@ -72,7 +73,8 @@ function selectAll(){
 
 //loeschen
 function deleteData($id){
-	global $servername, $username, $password, $dbname, $conn;
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "DELETE FROM users WHERE id = '?'";
 	$stmt = $conn->prepare($sql);
 	//$stmt = $conn->prepare($sql);
@@ -90,7 +92,8 @@ function deleteData($id){
 
 //Daten aktuallisieren
 function updateData($uname, $eMail, $kenn, $webseite, $komment, $gesch, $id) {
-	global $conn;
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "UPDATE users SET username = ?, email = ?, kennwort = ?, website = ?, kommentar = ?, geschlecht = ? WHERE id = ?";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('ssssssi', $uname, $eMail, $kenn, $webseite, $komment, $gesch, $id);
@@ -102,6 +105,24 @@ function updateData($uname, $eMail, $kenn, $webseite, $komment, $gesch, $id) {
 	}
 	$stmt->close();
 	$conn->close();
+}
+
+function logInCheck($uname, $kenn){
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "SELECT * FROM users WHERE username='$uname'";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		while ($row = $result->fetch_assoc()) {
+			$kn = $row["kennwort"];
+			if ($kn == $kenn) {
+				echo "eingeloggt";
+			}else {
+				echo "nicht eingeloggt";
+			}
+		}
+	}
+	
 }
 
 ?> 
