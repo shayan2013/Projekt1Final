@@ -24,7 +24,6 @@ function create(){
 		  echo "Error Datenbankerstellung: " . mysql_error() . "\n";
 	  }
 	}
-	$GLOBAL['conn'] = new mysqli($servername, $username, $password, $dbname);
 
 
 	// tebelle erstellen
@@ -35,25 +34,29 @@ function create(){
 	`reg_date` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 	PRIMARY KEY (`id`)) ENGINE = InnoDB; ";
 	
-	$conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 	$conn->query($sql);
+	echo "Verbindung zur Tabelle erfolgreich erstellt";
+	$conn->close();
 }
 
 
 //Daten einfuegen
 function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
-	//global $conn;
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "INSERT INTO users (username, email, kennwort, website, kommentar, geschlecht) VALUES (?, ?, ?, ?, ?, ?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("ssssss", $uname, $eMail, $kenn, $webseite, $komment, $gesch);
 	$stmt->execute();
 	echo "Daten erfolgreich eingetragen.";
 	$stmt->close();
+	$conn->close();
 }
 
 //alles ausgeben
 function selectAll(){
-	//global $conn;
+	global $conn;
 	$sql = "SELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){
@@ -64,12 +67,12 @@ function selectAll(){
 	}else {
 		echo "ergebnis 0";
 	}
-	
+	$conn->close();
 }
 
 //loeschen
 function deleteData($id){
-	//global $conn;
+	global $servername, $username, $password, $dbname, $conn;
 	$sql = "DELETE FROM users WHERE id = '?'";
 	$stmt = $conn->prepare($sql);
 	//$stmt = $conn->prepare($sql);
@@ -82,10 +85,12 @@ function deleteData($id){
 	}
 	
 	$stmt->close();
+	$conn->close();
 }
 
 //Daten aktuallisieren
 function updateData($uname, $eMail, $kenn, $webseite, $komment, $gesch, $id) {
+	global $conn;
 	$sql = "UPDATE users SET username = ?, email = ?, kennwort = ?, website = ?, kommentar = ?, geschlecht = ? WHERE id = ?";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('ssssssi', $uname, $eMail, $kenn, $webseite, $komment, $gesch, $id);
@@ -96,13 +101,6 @@ function updateData($uname, $eMail, $kenn, $webseite, $komment, $gesch, $id) {
 		echo "Daten nicht aktualisiert: " . $conn->error;
 	}
 	$stmt->close();
-}
-
-
-
-//Verbindung aufheben
-function closeConn(){
-	global $conn;
 	$conn->close();
 }
 
