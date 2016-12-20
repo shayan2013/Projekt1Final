@@ -4,7 +4,7 @@
 <html lang=de>
 	<head>
 		<?php include 'Microservices_de/meta.php';?>
-		<title>Home</title>
+		<title>Register</title>
 	</head>
 	<body>  
 
@@ -22,6 +22,7 @@
 		  $nameErr = "Nur Buchstaben und Leertaste erlaubt!"; 
 		}else {
 		$name = test_input($_POST["name"]);
+		$x++;
 	  }
 	  
 	  if (empty($_POST["email"])) {
@@ -31,6 +32,7 @@
 		  $emailErr = "ungültige Email-format"; 
 		}else {
 		$email = test_input($_POST["email"]);
+		$x++;
 		}
 		
 		
@@ -39,6 +41,7 @@
 		$kennwortErr = "kennwort erforderlich!";
 	  } else {
 		$kennwort = $_POST["kennwort"];
+		$x++;
 	  }
 	  
 	  if (empty($_POST["kennwort2"])) {
@@ -47,6 +50,7 @@
 		$kennwort2Err = "Kennwort stimmt nicht überein!";
 	  }else {
 		  $kennwort2 = $_POST["kennwort2"];
+		  $x++;
 	  }
 	  
 	  if (empty($_POST["website"])) {
@@ -55,6 +59,7 @@
 		$website = test_input($_POST["website"]);
 		if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
 		  $websiteErr = "ungültige URL"; 
+		  $x--;
 		}
 	  }
 
@@ -68,6 +73,7 @@
 		$geschlechtErr = "Geschlecht erforderlich!";
 	  } else {
 		$geschlecht = test_input($_POST["geschlecht"]);
+		$x++;
 	  }
 	}
 
@@ -76,6 +82,12 @@
 	  $data = stripslashes($data);
 	  $data = htmlspecialchars($data);
 	  return $data;
+	}
+	
+	if ($x == 5) {
+		create();
+		createData($name, $email, $kennwort, $website, $kommentar, $geschlecht);
+		$x = 0;
 	}
 	?>
 		<div class="flex-container">
