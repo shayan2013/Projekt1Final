@@ -31,6 +31,12 @@
 		$kennwort = $_POST["kennwort"];
 		$x++;
 	  }
+	  
+	  if ($x == 2) {
+		create();
+		logInCheck($name, $kennwort);
+		$x = 0;
+	  }
 	}
 	function test_input($data) {
 	  $data = trim($data);
@@ -39,11 +45,7 @@
 	  return $data;
 	}
 	
-	if ($x == 5) {
-		create();
-		createData($name, $email, $kennwort, $website, $kommentar, $geschlecht);
-		$x = 0;
-	}
+
 	
 	?>
 		<div class="flex-container">
