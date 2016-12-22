@@ -1,3 +1,4 @@
+<?php include 'Microservices_de/session.php';?>
 <?php include 'Microservices_de/headerFooter.php';?>
 <?php include 'Microservices_de/dbConfig.php';?>
 <!DOCTYPE HTML>  
@@ -34,7 +35,11 @@
 	  
 	  if ($x == 2) {
 		create();
-		logInCheck($name, $kennwort);
+		$y = logInCheck($name, $kennwort);
+		if ($y == 1){
+			sessionSetName($name);
+			echo "Willkommen " . $_SESSION["uname"];
+		}
 		$x = 0;
 	  }
 	}
