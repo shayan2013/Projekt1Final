@@ -116,7 +116,7 @@ function logInCheck($uname, $kenn){
 		while ($row = $result->fetch_assoc()) {
 			$kn = $row["kennwort"];
 			if ($kn == $kenn) {
-				echo "eingeloggt";
+				return 1;
 			}else {
 				echo "nicht eingeloggt";
 			}
