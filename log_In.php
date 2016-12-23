@@ -41,7 +41,7 @@
 				$y = logInCheck($name, $kennwort);
 			    if ($y == 1){
 					sessionSetName($name);
-					echo "Willkommen " . $_SESSION["uname"];
+					header("Location: index.php");
 				}
 				$x = 0;
 			  }
