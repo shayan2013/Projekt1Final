@@ -23,6 +23,11 @@
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>
 			<form action="Microservices_de/upload.php" method="post" enctype="multipart/form-data">
+				<?php
+					if (isset($_SESSION["uname"])) {
+						echo "Willkommen " . $_SESSION["uname"] . " !<br>";
+					}
+				?>
 				Bilder Hochladen:
 				<input type="file" name="fileToUpload" id="fileToUpload">
 				<input type="submit" value="Upload Image" name="submit">
