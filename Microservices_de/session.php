@@ -2,6 +2,10 @@
 
 	session_start();
 	
+	function sessionWelcome($welcome){
+		$_SESSION["welcome"] = $welcome;
+	}
+	
 	function sessionSetName($uname){
 		$_SESSION["uname"] = $uname;
 	}
