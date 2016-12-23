@@ -1,7 +1,7 @@
 <?php
 
 	session_start();
-	
+
 	function sessionWelcome($welcome){
 		$_SESSION["welcome"] = $welcome;
 	}
@@ -15,7 +15,10 @@
 	}
 	
 	function sessionDestroy(){
-		session_unset();
 		session_destroy();
+	}
+	
+	function sessionUnset($unset){
+		unset($_SESSION[$unset]);
 	}
 ?>
