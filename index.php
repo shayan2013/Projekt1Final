@@ -1,10 +1,15 @@
+<?php include 'Microservices_de/session.php';?>
 <?php include 'Microservices_de/headerFooter.php';?>
 <!DOCTYPE html>
 
-<script>
-	window.alert("Welcome to ShaBlog");
-</script>
-
+<?php
+	if (!isset($_SESSION["welcome"])) {
+		echo '<script>
+				window.alert("Welcome to ShaBlog");
+			</script>';
+		sessionWelcome("welc");
+	}
+?>
 <html lang=de>
 	<head>
 		<?php include 'Microservices_de/meta.php';?>
