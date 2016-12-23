@@ -16,41 +16,46 @@
 	$x = 0;
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	  if (empty($_POST["name"])) {
-		$nameErr = "Name erforderlich!";
-		 // testen ob der Name nur aus Buchstaben und Leertaste besteht
-	  } elseif (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-		  $nameErr = "Nur Buchstaben und Leertaste erlaubt!"; 
-		}else {
-		$name = test_input($_POST["name"]);
-		$x++;
-	  }
-	  
-	  if (empty($_POST["kennwort"])) {
-		$kennwortErr = "kennwort erforderlich!";
-	  } else {
-		$kennwort = $_POST["kennwort"];
-		$x++;
-	  }
-	  
-	  if ($x == 2) {
-		create();
-		$y = logInCheck($name, $kennwort);
-		if ($y == 1){
-			sessionSetName($name);
-			echo "Willkommen " . $_SESSION["uname"];
-		}
-		$x = 0;
-	  }
-	}
-	function test_input($data) {
-	  $data = trim($data);
-	  $data = stripslashes($data);
-	  $data = htmlspecialchars($data);
-	  return $data;
-	}
-	
+		if (isset($_POST['logOut'])) {
+			sessionDestroy();
+		} else {
+			if (empty($_POST["name"])) {
+				$nameErr = "Name erforderlich!";
+				 // testen ob der Name nur aus Buchstaben und Leertaste besteht
+			 } elseif (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+				  $nameErr = "Nur Buchstaben und Leertaste erlaubt!"; 
+			 }else {
+				$name = test_input($_POST["name"]);
+				$x++;
+			 }
+			  
+			 if (empty($_POST["kennwort"])) {
+				$kennwortErr = "kennwort erforderlich!";
+			 } else {
+				$kennwort = $_POST["kennwort"];
+				$x++;
+		     }
+			  
+		     if ($x == 2) {
+				create();
+				$y = logInCheck($name, $kennwort);
+			    if ($y == 1){
+					sessionSetName($name);
+					echo "Willkommen " . $_SESSION["uname"];
+				}
+				$x = 0;
+			  }
+			  		  
+			}
 
+		}
+		
+			function test_input($data) {
+				  $data = trim($data);
+				  $data = stripslashes($data);
+				  $data = htmlspecialchars($data);
+				  return $data;
+			 }	
 	
 	?>
 		<div class="flex-container">
@@ -67,7 +72,13 @@
 			  Kennwort: <input type="password" name="kennwort" value="<?php echo $kennwort;?>">
 			  <span class="error">* <?php echo $kennwortErr;?></span>
 			  <br><br>
-			  <input type="submit" name="submit" value="Absenden">  
+			  <?php 
+				if (isset($_SESSION["uname"])) { 
+				 echo '<input type="submit" name="logOut" value="Log Out">';  
+			   } else { 
+				 echo '<input type="submit" name="LogIn" value="Log In">';  
+			   } 
+			   ?>
 			  <p>noch nicht registiert? <a href="register.php"> klick hier!</a></P>
 			</form>
 			<footer><?php footi();?></footer>
