@@ -50,6 +50,8 @@ function createData($uname, $eMail, $kenn, $webseite, $komment, $gesch){
 	$stmt->bind_param("ssssss", $uname, $eMail, $kenn, $webseite, $komment, $gesch);
 	$stmt->execute();
 	echo "Daten erfolgreich eingetragen.";
+	$last_id = $conn->insert_id;
+	return $last_id;
 	$stmt->close();
 	$conn->close();
 }
@@ -68,6 +70,24 @@ function selectAll(){
 	}else {
 		echo "ergebnis 0";
 	}
+	$conn->close();
+}
+
+//eine auswaehlen
+function selectOne($id){
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "SELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users WHERE id = " . $id ;
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc()) {
+			return "id: " . $row["id"]. " - username: " . $row["username"]. " - email" . $row["email"]. " - kennwort" . $row["kennwort"]. "\n" .
+			 " - website" . $row["website"]. " - kommentar" . $row["kommentar"]. " - geschlecht" . $row["geschlecht"]. " - reg_date" . $row["reg_date"]. "\n";			
+		}
+	} else {
+		return "ergebnis 0";
+	}
+		
 	$conn->close();
 }
 
