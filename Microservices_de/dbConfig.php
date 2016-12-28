@@ -64,8 +64,8 @@ function selectAll(){
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
-			echo "id: " . $row["id"]. " - username: " . $row["username"]. " - email" . $row["email"]. " - kennwort" . $row["kennwort"]. "<br>" .
-			 " - website" . $row["website"]. " - kommentar" . $row["kommentar"]. " - geschlecht" . $row["geschlecht"]. " - reg_date" . $row["reg_date"]. "<br>";
+			echo "id: " . $row["id"]. " - username: " . $row["username"]. " - email: " . $row["email"]. " - kennwort: " . $row["kennwort"].
+			 " - website: " . $row["website"]. " - kommentar: " . $row["kommentar"]. " - geschlecht: " . $row["geschlecht"]. " - reg_date: " . $row["reg_date"]. "<br>";
 		}
 	}else {
 		echo "ergebnis 0";
@@ -81,8 +81,8 @@ function selectOne($id){
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
-			return "id: " . $row["id"]. " - username: " . $row["username"]. " - email" . $row["email"]. " - kennwort" . $row["kennwort"]. "\n" .
-			 " - website" . $row["website"]. " - kommentar" . $row["kommentar"]. " - geschlecht" . $row["geschlecht"]. " - reg_date" . $row["reg_date"]. "\n";			
+			return "id: " . $row["id"]. " - username: " . $row["username"]. " - email: " . $row["email"]. " - kennwort: " . $row["kennwort"]. "\n" .
+			 " - website: " . $row["website"]. " - kommentar: " . $row["kommentar"]. " - geschlecht: " . $row["geschlecht"]. " - reg_date: " . $row["reg_date"]. "\n";			
 		}
 	} else {
 		return "ergebnis 0";
