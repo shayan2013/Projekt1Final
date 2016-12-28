@@ -14,7 +14,7 @@
 				<?php headi();?>
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>
-			
+			<?php selectAll(); ?>
 			
 			<footer><?php footi();?></footer>
 		</div>
