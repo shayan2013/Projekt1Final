@@ -15,7 +15,11 @@
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>
 			<?php selectAll(); ?>
-			
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+			id: <input type="number" name="id" value="<?php echo $id;?>">
+			<input type="submit" name="delete" value="delete">
+			<input type="submit" name="update" value="update">
+			<br><br>
 			<footer><?php footi();?></footer>
 		</div>
 
