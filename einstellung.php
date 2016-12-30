@@ -15,7 +15,9 @@
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>
 			<?php 
-				$id = $idErr = "";
+				$id = $un = $em = $kenn = "";
+				$idErr = $unErr = $emErr = $kennErr = "";
+				
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if (test_input($_POST["id"])) {
 						if (isset($_POST['delete'])) {
@@ -45,6 +47,11 @@
 			<span class="error">* <?php echo $idErr;?></span>
 			<input type="submit" name="delete" value="delete">
 			<input type="submit" name="update" value="update">
+			<br><br>
+			username: <input type="text" name="username" value="<?php echo $un;?>">
+			email: <input type="text" name="email" value="<?php echo $em;?>">
+			kennwort: <input type="text" name="kennwort" value="<?php echo $kenn;?>">
+			</form>
 			<br><br>
 			<footer><?php footi();?></footer>
 		</div>
