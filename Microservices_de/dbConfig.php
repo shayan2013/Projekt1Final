@@ -95,18 +95,17 @@ function selectOne($id){
 function deleteData($id){
 	global $servername, $username, $password, $dbname;
 	$conn = new mysqli($servername, $username, $password, $dbname);
-	$sql = "DELETE FROM users WHERE id = '?'";
-	$stmt = $conn->prepare($sql);
+	$sql = "DELETE FROM users WHERE id ='$id'";
 	//$stmt = $conn->prepare($sql);
-	$stmt->bind_param("i", $id);
-	$stmt->execute(); 
+	//$stmt->bind_param("i", $id);
+	//$stmt->execute(); 
 	if ($conn->query($sql) === TRUE) {
-		echo "Daten erfolgreich geloescht.";
+		return "Daten erfolgreich geloescht.";
 	} else {
-		echo "Daten nicht geloescht: " . $conn->error;
+		return "Daten nicht geloescht: " . $conn->error;
 	}
 	
-	$stmt->close();
+	//$stmt->close();
 	$conn->close();
 }
 
