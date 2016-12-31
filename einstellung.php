@@ -17,18 +17,45 @@
 			<?php 
 				$id = $un = $em = $kenn = "";
 				$idErr = $unErr = $emErr = $kennErr = "";
+				$x = 0;
 				
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
-					if (test_input($_POST["id"])) {
+					if (test_id($_POST["id"])) {
 						if (isset($_POST['delete'])) {
 							deleteData($_POST["id"]);
-						}/*else {
-							updateData($_POST["id"]);
-						}	*/					
+						}elseif (test_update($un, $em, $kenn)) {
+							updateData($un, $em, $kenn, $_POST["id"]);
+						}						
 					}
 				}
 				
-				function test_input($num) {
+				function test_update($un, $em, $kenn){
+					if (!(empty($un)) {
+						if (!(preg_match("/^[a-zA-Z ]*$/",$num)) {
+							$unErr = "Nur Buchstaben und Leertaste erlaubt!"; 
+						} else {
+							$x++;
+						}
+					}
+					if (!(empty($em)) {
+						if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+							$emErr = "ungültige Email-format";  
+						} else {
+							$x++;
+						}
+					}
+					if (!(empty($kenn)) {
+							$x++;
+					}
+					if ($x > 0) {
+						$x = 0;
+						return true;
+					} else {
+						return false;
+					}
+				}
+				
+				function test_id($num) {
 					if (empty($num)) {
 						$idErr = "id erforderlich!";
 						return false;
