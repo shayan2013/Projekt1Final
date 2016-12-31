@@ -30,21 +30,21 @@
 				}
 				
 				function test_update($un, $em, $kenn){
-					if (!(empty($un)) {
-						if (!(preg_match("/^[a-zA-Z ]*$/",$num)) {
+					if (!empty($un)) {
+						if (!(preg_match("/^[a-zA-Z ]*$/",$num))) {
 							$unErr = "Nur Buchstaben und Leertaste erlaubt!"; 
 						} else {
 							$x++;
 						}
 					}
-					if (!(empty($em)) {
+					if (!empty($em)) {
 						if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 							$emErr = "ungültige Email-format";  
 						} else {
 							$x++;
 						}
 					}
-					if (!(empty($kenn)) {
+					if (!empty($kenn)) {
 							$x++;
 					}
 					if ($x > 0) {
