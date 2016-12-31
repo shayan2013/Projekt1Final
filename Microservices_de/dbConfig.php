@@ -110,12 +110,24 @@ function deleteData($id){
 }
 
 //Daten aktuallisieren
-function updateData($uname, $eMail, $kenn, $webseite, $komment, $gesch, $id) {
+function updateData($uname, $eMail, $kenn, $id) {
 	global $servername, $username, $password, $dbname;
 	$conn = new mysqli($servername, $username, $password, $dbname);
-	$sql = "UPDATE users SET username = ?, email = ?, kennwort = ?, website = ?, kommentar = ?, geschlecht = ? WHERE id = ?";
+	if (empty($uname){
+		$sql = "SELECT username FROM users WHERE id ='$id'"
+		$uname = $conn->query($sql);
+	}
+	if (empty($eMail){
+		$sql = "SELECT email FROM users WHERE id ='$id'"
+		$eMail = $conn->query($sql);
+	}
+	if (empty($kenn){
+		$sql = "SELECT kennwort FROM users WHERE id ='$id'"
+		$kenn = $conn->query($sql);
+	}
+	$sql = "UPDATE users SET username = ?, email = ?, kennwort = ? WHERE id = ?";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ssssssi', $uname, $eMail, $kenn, $webseite, $komment, $gesch, $id);
+	$stmt->bind_param('sssi', $uname, $eMail, $kenn, $id);
 	$stmt->execute();
 	if ($conn->query($sql) === TRUE) {
 		echo "Daten erfolgreich aktualisiert.";
