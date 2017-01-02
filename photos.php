@@ -3,12 +3,12 @@
 <html lang=de>
 	<head>
 		<?php include 'Microservices_de/meta.php';?>
-		<title>Log In/Out</title>
+		<title>Photos</title>
 	</head>
 	<body> 
 		<div class="flex-container">
 			<header>
-				<h1>Log In</h1>
+				<h1>Bilder</h1>
 				<?php headi();?>
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>	
