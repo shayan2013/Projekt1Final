@@ -16,7 +16,7 @@
 			<?php include 'Microservices_de/navigation.php';?>
 			<?php 
 				$id = $un = $em = $kenn = "";
-				$idErr = $unErr = $emErr = $kennErr = "";
+				$idErr = $unErr = $emErr = $kennErr = $updateErr = $deleteErr = "";
 				
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if (test_id($_POST["id"])) {
@@ -30,6 +30,7 @@
 				}
 				
 				function test_update($un, $em, $kenn){
+					global $unErr, $emErr;
 					$x = 0;
 					if (!empty($un)) {
 						if (!(preg_match("/^[a-zA-Z ]*$/",$un))) {
@@ -57,6 +58,7 @@
 				}
 				
 				function test_id($num) {
+					global $idErr;
 					if (empty($num)) {
 						$idErr = "id erforderlich!";
 						return false;
@@ -75,9 +77,13 @@
 			<span class="error">* <?php echo $idErr;?></span>
 			<input type="submit" name="delete" value="delete">
 			<input type="submit" name="update" value="update">
+			<span class="error">* <?php echo $updateErr;?></span>
+			<span class="error">* <?php echo $deleteErr;?></span>
 			<br><br>
 			username: <input type="text" name="username" value="<?php echo $un;?>">
+			<span class="error">* <?php echo $unErr;?></span>
 			email: <input type="text" name="email" value="<?php echo $em;?>">
+			<span class="error">* <?php echo $emErr;?></span>
 			kennwort: <input type="text" name="kennwort" value="<?php echo $kenn;?>">
 			</form>
 			<br><br>
