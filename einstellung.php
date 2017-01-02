@@ -16,16 +16,15 @@
 			<?php include 'Microservices_de/navigation.php';?>
 			<?php 
 				$id = $un = $em = $kenn = "";
-				$idErr = $unErr = $emErr = $kennErr = $updateErr = $deleteErr = "";
+				$idErr = $unErr = $emErr = $kennErr = $deleteErr = "";
 				
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if (test_id($_POST["id"])) {
 						if (isset($_POST['delete'])) {
 							deleteData($_POST["id"]);
 						}elseif (test_update($_POST["username"], $_POST["email"], $_POST["kennwort"])) {
-							echo "go to updateData";
 							updateData($_POST["username"], $_POST["email"], $_POST["kennwort"], $_POST["id"]);
-						}						
+						}
 					}
 				}
 				
@@ -77,13 +76,12 @@
 			<span class="error">* <?php echo $idErr;?></span>
 			<input type="submit" name="delete" value="delete">
 			<input type="submit" name="update" value="update">
-			<span class="error">* <?php echo $updateErr;?></span>
-			<span class="error">* <?php echo $deleteErr;?></span>
+			<span class="error"><?php echo $deleteErr;?></span>
 			<br><br>
 			username: <input type="text" name="username" value="<?php echo $un;?>">
-			<span class="error">* <?php echo $unErr;?></span>
+			<span class="error"><?php echo $unErr;?></span>
 			email: <input type="text" name="email" value="<?php echo $em;?>">
-			<span class="error">* <?php echo $emErr;?></span>
+			<span class="error"><?php echo $emErr;?></span>
 			kennwort: <input type="text" name="kennwort" value="<?php echo $kenn;?>">
 			</form>
 			<br><br>
