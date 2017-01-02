@@ -33,6 +33,22 @@ header, footer {background: black;color:white;}
 	color: red;
 }
 
+table#selectAllTable {
+	width: 100%;
+	background-color: #f1f1c1;
+	text-align: left;
+	border-collapse: collapse;
+} 
+
+table#selectAllTable th {
+	color: white;
+	background-color: black;
+} 
+
+table#selectAllTable th, td{
+	border: 1px solid black;
+} 
+
 @media all and (min-width: 768px) {
     .nav {text-align:left;-webkit-flex: 1 auto;flex:1 auto;-webkit-order:1;order:1;}
     .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
