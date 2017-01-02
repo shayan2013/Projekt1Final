@@ -62,14 +62,29 @@ function selectAll(){
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "SELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users";
 	$result = $conn->query($sql);
+	echo "<table id='selectAllTable'>
+		  	<tr>
+    			<th>id</th>
+    			<th>username</th> 
+    			<th>email</th>
+				<th>kennwort</th>
+				<th>website</th>
+				<th>kommentar</th>
+				<th>geschlecht</th>
+				<th>reg_date</th>
+  			</tr>
+		 ";
 	if ($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
-			echo "id: " . $row["id"]. " - username: " . $row["username"]. " - email: " . $row["email"]. " - kennwort: " . $row["kennwort"].
-			 " - website: " . $row["website"]. " - kommentar: " . $row["kommentar"]. " - geschlecht: " . $row["geschlecht"]. " - reg_date: " . $row["reg_date"]. "<br>";
+			echo "<tr>";
+			echo "<td>" . $row["id"]. "</td><td>" . $row["username"]. "</td><td>" . $row["email"]. "</td><td>" . $row["kennwort"].
+			 "</td><td>" . $row["website"]. "</td><td>" . $row["kommentar"]. "</td><td>" . $row["geschlecht"]. "</td><td>" . $row["reg_date"]. "</td>";
+			echo "</tr>";
 		}
 	}else {
-		echo "ergebnis 0";
+		echo "<tr>ergebnis 0</tr>";
 	}
+	echo "</table>";
 	$conn->close();
 }
 
