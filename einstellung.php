@@ -17,28 +17,29 @@
 			<?php 
 				$id = $un = $em = $kenn = "";
 				$idErr = $unErr = $emErr = $kennErr = "";
-				$x = 0;
 				
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if (test_id($_POST["id"])) {
 						if (isset($_POST['delete'])) {
 							deleteData($_POST["id"]);
-						}elseif (test_update($un, $em, $kenn)) {
-							updateData($un, $em, $kenn, $_POST["id"]);
+						}elseif (test_update($_POST["username"], $_POST["email"], $_POST["kennwort"])) {
+							echo "go to updateData";
+							updateData($_POST["username"], $_POST["email"], $_POST["kennwort"], $_POST["id"]);
 						}						
 					}
 				}
 				
 				function test_update($un, $em, $kenn){
+					$x = 0;
 					if (!empty($un)) {
-						if (!(preg_match("/^[a-zA-Z ]*$/",$num))) {
+						if (!(preg_match("/^[a-zA-Z ]*$/",$un))) {
 							$unErr = "Nur Buchstaben und Leertaste erlaubt!"; 
 						} else {
 							$x++;
 						}
 					}
 					if (!empty($em)) {
-						if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+						if (filter_var($em, FILTER_VALIDATE_EMAIL)) {
 							$emErr = "ungültige Email-format";  
 						} else {
 							$x++;
@@ -48,7 +49,7 @@
 							$x++;
 					}
 					if ($x > 0) {
-						$x = 0;
+						//$x = 0;
 						return true;
 					} else {
 						return false;
