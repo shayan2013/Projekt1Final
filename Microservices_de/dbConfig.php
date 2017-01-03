@@ -177,4 +177,19 @@ function logInCheck($uname, $kenn){
 	
 }
 
+function changeBlog($id, $blog) {
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "UPDATE users SET kommentar = ? WHERE id = ?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('si', $blog, $id);
+	$stmt->execute();
+	if ($conn->query($sql) === TRUE) {
+		return true;
+	} else {
+		return false;
+	}
+	$stmt->close();
+	$conn->close();
+
 ?> 
