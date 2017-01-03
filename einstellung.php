@@ -28,8 +28,8 @@
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>
 			<?php 
-				$id = $un = $em = $kenn = "";
-				$idErr = $unErr = $emErr = $kennErr = $deleteErr = "";
+				$id = $un = $em = $kenn = $kommentar = "";
+				$idErr = $unErr = $emErr = $kennErr = $deleteErr = $kommentErr = "";
 				
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if (test_id($_POST["id"])) {
@@ -83,20 +83,34 @@
 					}
 				}
 			?>
-			<?php selectAll(); ?>
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-			id: <input type="number" name="id" value="<?php echo $id;?>">
-			<span class="error">* <?php echo $idErr;?></span>
-			<input type="submit" name="delete" value="delete">
-			<input type="submit" name="update" value="update">
-			<span class="error"><?php echo $deleteErr;?></span>
-			<br><br>
-			username: <input type="text" name="username" value="<?php echo $un;?>">
-			<span class="error"><?php echo $unErr;?></span>
-			email: <input type="text" name="email" value="<?php echo $em;?>">
-			<span class="error"><?php echo $emErr;?></span>
-			kennwort: <input type="text" name="kennwort" value="<?php echo $kenn;?>">
-			</form>
+			<?php 
+				if ($_SESSION["uname"] == "Admin"){
+					selectAll();
+					echo '<form method="post" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">  
+					id: <input type="number" name="id" value="'.$id.'">
+					<span class="error">*'.$idErr.'</span>
+					<input type="submit" name="delete" value="delete">
+					<input type="submit" name="update" value="update">
+					<span class="error">'.$deleteErr.'</span>
+					<br><br>
+					username: <input type="text" name="username" value="'.$un.'">
+					<span class="error">'.$unErr.'</span>
+					email: <input type="text" name="email" value="'.$em.'">
+					<span class="error">'.$emErr.'</span>
+					kennwort: <input type="text" name="kennwort" value="'.$kenn.'">
+					</form>';
+				} else {
+					selectPerson($_SESSION["uname"]);
+					echo '<form method="get" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">  
+					Kommentar: <textarea name="kommentar" rows="5" cols="40">'.$kommentar.'</textarea>
+					<input type="submit" name="updateK" value="Update Kommentar">
+					<span class="error">'.$kommentErr.'</span>
+					<br><br>
+					</form>';
+				}			
+			?>
+
+			
 			<br><br>
 			<footer><?php footi();?></footer>
 		</div>
