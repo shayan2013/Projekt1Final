@@ -10,10 +10,6 @@
 		$_SESSION["uname"] = $uname;
 	}
 	
-	function sessionSetId($id) {
-		$_SESSION["id"] = $id;
-	}
-	
 	function sessionPrint(){
 		print_r($_SESSION);
 	}
