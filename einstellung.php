@@ -32,14 +32,16 @@
 				$idErr = $unErr = $emErr = $kennErr = $deleteErr = $kommentErr = "";
 				
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
-					if (test_id($_POST["id"])) {
+					if (isset($_POST['updateK'])) {
+						changeBlog($_SESSION["uname"], $_POST["kommentar"]);
+					}elseif (test_id($_POST["id"])) {
 						if (isset($_POST['delete'])) {
 							deleteData($_POST["id"]);
 						}elseif (test_update($_POST["username"], $_POST["email"], $_POST["kennwort"])) {
 							updateData($_POST["username"], $_POST["email"], $_POST["kennwort"], $_POST["id"]);
 						}
 					}
-				}
+				} 
 				
 				function test_update($un, $em, $kenn){
 					global $unErr, $emErr;
@@ -101,7 +103,7 @@
 					</form>';
 				} else {
 					selectPerson($_SESSION["uname"]);
-					echo '<form method="get" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">  
+					echo '<form method="post" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">  
 					Kommentar: <textarea name="kommentar" rows="5" cols="40">'.$kommentar.'</textarea>
 					<input type="submit" name="updateK" value="Update Kommentar">
 					<span class="error">'.$kommentErr.'</span>
