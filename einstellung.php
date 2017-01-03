@@ -1,15 +1,20 @@
 <?php include 'Microservices_de/session.php';?>
 <?php include 'Microservices_de/headerFooter.php';?>
 <?php include 'Microservices_de/dbConfig.php';?>
+
+<!DOCTYPE HTML>  
+
 <?php
 	if (!isset($_SESSION["uname"])) {
-		echo '<script>
-				window.alert("first Log-In please!");
-			</script>';
-		header("Location: log_In.php");
+		print '<script>
+					if (confirm("first Log-In please!") == true) {
+						location.replace("log_In.php");
+					} else {
+						location.replace("index.php");
+					}
+				</script>';
 	}
 ?>
-<!DOCTYPE HTML>  
 <html lang=de>
 	<head>
 		<?php include 'Microservices_de/meta.php';?>
