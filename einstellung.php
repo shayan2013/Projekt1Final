@@ -1,6 +1,14 @@
 <?php include 'Microservices_de/session.php';?>
 <?php include 'Microservices_de/headerFooter.php';?>
 <?php include 'Microservices_de/dbConfig.php';?>
+<?php
+	if (!isset($_SESSION["uname"])) {
+		echo '<script>
+				window.alert("first Log-In please!");
+			</script>';
+		header("Location: log_In.php");
+	}
+?>
 <!DOCTYPE HTML>  
 <html lang=de>
 	<head>
