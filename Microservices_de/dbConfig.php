@@ -184,13 +184,43 @@ function changeBlog($uname, $blog) {
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('ss', $blog, $uname);
 	$stmt->execute();
-	if ($conn->query($sql)) === TRUE) {
+	if ($conn->query($sql) === TRUE) {
 		return true;
 	} else {
 		return false;
 	}
 	$stmt->close();
 	$conn->close();
+}
+
+function selectPerson($uname) {
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "SELECT id, username, email, kennwort, website, kommentar, geschlecht, reg_date FROM users WHERE username ='$uname'";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		echo "<table id='selectAllTable'>
+			  	<tr>
+	    			<th>id</th>
+	    			<th>username</th> 
+	    			<th>email</th>
+					<th>kennwort</th>
+					<th>website</th>
+					<th>kommentar</th>
+					<th>geschlecht</th>
+					<th>reg_date</th>
+	  			</tr>
+			 ";
+		while ($row = $result->fetch_assoc()) {
+			echo "<tr>";
+			echo "<td>" . $row["id"]. "</td><td>" . $row["username"]. "</td><td>" . $row["email"]. "</td><td>" . $row["kennwort"].
+			 "</td><td>" . $row["website"]. "</td><td>" . $row["kommentar"]. "</td><td>" . $row["geschlecht"]. "</td><td>" . $row["reg_date"]. "</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+	}
+	$conn->close();
+
 }
 
 ?> 
