@@ -1,5 +1,6 @@
 <?php include 'Microservices_de/session.php';?>
 <?php include 'Microservices_de/headerFooter.php';?>
+<?php include 'Microservices_de/dbConfig.php';?>
 <!DOCTYPE html>
 
 <?php
@@ -20,14 +21,16 @@
 			<header>
 				<h1>ShaBlog</h1>
 				<?php headi();?>
+				<?php include 'Microservices_de/navigation.php';?>
 			</header>
-			<?php include 'Microservices_de/navigation.php';?>
 			<form action="Microservices_de/upload.php" method="post" enctype="multipart/form-data">
 				<?php
 					if (isset($_SESSION["uname"])) {
 						echo "Willkommen " . $_SESSION["uname"] . " !<br>";
 					}
+					getKomment($_SESSION["uname"]);
 				?>
+				<br><br>
 				Bilder Hochladen:
 				<input type="file" name="fileToUpload" id="fileToUpload">
 				<input type="submit" value="Upload Image" name="submit">
