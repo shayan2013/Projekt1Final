@@ -12,7 +12,7 @@
 				<?php headi();?>
 			</header>
 			<?php include 'Microservices_de/navigation.php';?>	
-			<?php include 'Microservices_de/imageConf.php';?>
+			<?php require 'Microservices_de/imageConf.php';?>
 			<footer><?php footi();?></footer>
 		</div>
 	</body>

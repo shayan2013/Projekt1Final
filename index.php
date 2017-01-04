@@ -1,6 +1,6 @@
-<?php include 'Microservices_de/session.php';?>
+<?php require 'Microservices_de/session.php';?>
 <?php include 'Microservices_de/headerFooter.php';?>
-<?php include 'Microservices_de/dbConfig.php';?>
+<?php require 'Microservices_de/dbConfig.php';?>
 <!DOCTYPE html>
 
 <?php

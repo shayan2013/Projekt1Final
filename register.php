@@ -1,5 +1,6 @@
 <?php include 'Microservices_de/headerFooter.php';?>
-<?php include 'Microservices_de/dbConfig.php';?>
+<?php require 'Microservices_de/dbConfig.php';?>
+<?php include 'Microservices_de/fileCreater.php';?>
 <!DOCTYPE HTML>  
 <html lang=de>
 	<head>
@@ -86,8 +87,11 @@
 	
 	if ($x == 5) {
 		create();
-		createData($name, $email, $kennwort, $website, $kommentar, $geschlecht);
+		$lastId = createData($name, $email, $kennwort, $website, $kommentar, $geschlecht);
+		$text = selectOne($lastId);
+		writeData($text);
 		$x = 0;
+		header("Location: log_In.php");
 	}
 	?>
 		<div class="flex-container">
