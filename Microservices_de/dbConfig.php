@@ -223,4 +223,27 @@ function selectPerson($uname) {
 
 }
 
+function getKomment($uname) {
+	global $servername, $username, $password, $dbname;
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "SELECT kommentar FROM users WHERE username ='$uname'";	
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		echo "<table id='selectAllTable'>
+			  	<tr>	
+	    			<th>username</th>
+					<th>kommentar</th>	
+	  			</tr>
+			 ";
+		while ($row = $result->fetch_assoc()) {
+			echo "<tr>";
+			echo "<td>" . $row["username"]. "</td><td>" . $row["kommentar"]. "</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+	}
+	$conn->close();
+}
+
+
 ?> 
