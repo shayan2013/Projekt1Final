@@ -23,6 +23,14 @@
 				<?php headi();?>
 				<?php include 'Microservices_de/navigation.php';?>
 			</header>
+			<h1>Satz des Tages</h1>
+			<h3>
+			<?php
+				$myfile = fopen("tagesblog.txt", "r") or die("Unable to open file!");
+				echo fread($myfile,filesize("tagesblog.txt"));
+				fclose($myfile);
+			?>
+			</h3>
 			<form action="Microservices_de/upload.php" method="post" enctype="multipart/form-data">
 				<?php
 					if (isset($_SESSION["uname"])) {
