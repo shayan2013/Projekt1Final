@@ -237,7 +237,7 @@ function getKomment($uname) {
 			 ";
 		while ($row = $result->fetch_assoc()) {
 			echo "<tr>";
-			echo "<td>" . $row["username"]. "</td><td>" . $row["kommentar"]. "</td>";
+			echo "<td>" . $uname . "</td><td>" . $row["kommentar"]. "</td>";
 			echo "</tr>";
 		}
 		echo "</table>";
